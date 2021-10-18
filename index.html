@@ -1,219 +1,208 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang=zh_CN style="font-size: 40px;">
 <head>
-    <meta charset="UTF-8">
-    <title>加入购物车动画3</title>
+    <meta charset=utf-8>
+    <title>加入购物车动画1</title>
     <style>
-        .icon-cart {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            float: right;
-            width: 48px;
-            height: 48px;
-            overflow: hidden;
+        a {
+            width:3.5rem;
+            height: 2.6rem;
+            display: inline-block;
+            background: #ff8800;
+            color: #333;
+            text-decoration: none;
+            margin: 10px;
         }
 
-        .icon-cart .cart-line-1 {
-            width: 15%;
-            height: 7%;
+        .source {
             position: absolute;
-            left: 8%;
-            top: 25%;
-            transform: rotate(5deg);
-            background-color: #000;
-            border-bottom-left-radius: 35%;
+            top: 490px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
         }
 
-        .icon-cart .cart-line-2 {
-            width: 35%;
-            height: 7%;
+        .box {
             position: absolute;
-            left: 6%;
-            top: 40%;
-            transform: rotate(80deg);
-            background-color: #000;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 50px;
+            -webkit-animation: parabola 0.5s linear;
+            animation: parabola 0.5s linear;
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
         }
 
-        .icon-cart .cart-line-2:before {
+        .img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 50px;
+            background: red;
+            -webkit-animation: img-scale 0.5s linear;
+            animation: img-scale 0.5s linear;
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+        }
+        .img:after {
             content: "";
-            width: 120%;
-            height: 100%;
-            position: absolute;
-            left: 45%;
-            top: -280%;
-            transform: rotate(-80deg);
-            background-color: inherit;
-        }
-
-        .icon-cart .cart-line-2:after {
-            content: "";
-            width: 70%;
-            height: 100%;
-            position: absolute;
-            left: 59%;
-            top: -670%;
-            background-color: inherit;
-            transform: rotate(40deg);
-            border-top-left-radius: 50%;
-            border-bottom-left-radius: 25%;
-        }
-
-        .icon-cart .cart-line-3 {
-            width: 30%;
-            height: 7%;
-            position: absolute;
-            left: 33%;
-            top: 45%;
-            background-color: #000;
-        }
-
-        .icon-cart .cart-line-3:after {
-            content: "";
-            width: 124%;
-            height: 100%;
-            position: absolute;
-            top: -150%;
-            left: -5%;
-            background-color: inherit;
-        }
-
-        .icon-cart .cart-wheel {
-            width: 12%;
-            height: 12%;
-            background-color: #000;
-            border-radius: 100%;
-            position: absolute;
-            left: 28%;
-            bottom: 20%;
-        }
-
-        .icon-cart .cart-wheel:after {
-            content: "";
-            width: 100%;
-            height: 100%;
-            background-color: inherit;
-            border-radius: 100%;
-            position: absolute;
-            left: 200%;
-            bottom: 0;
-        }
-
-        .grid {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            width: 500px;
-            margin: 0 auto;
-        }
-
-        .product {
-            position: relative;
-            flex-basis: 150px;
-            background: #fff;
-            padding: 1rem;
-            border-radius: 1rem;
-            margin: 0 0 2rem;
-        }
-        .product img {
-            offset-rotate: 0deg;
-            transition: all 300ms;
-        }
-
-        .product__buy {
             display: block;
-            width: 100%;
-            margin: 0;
-            padding: 1rem 2rem;
-            border: 0;
-            background: #02A7D7;
-            color: #fff;
-            cursor: pointer;
-        }
-        .product__buy:hover {
-            background: #08f;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            border-bottom: 10px solid red;
+            border-left: 25px solid #fff;
+            border-right: 25px solid #fff;
         }
 
-        .product__image--is-flying {
-            -webkit-animation: fly-to-cart 500ms 1 ease-in-out forwards;
-            animation: fly-to-cart 500ms 1 ease-in-out forwards;
-            opacity: 0.5;
-            border-radius: 50%;
-        }
-
-        @-webkit-keyframes fly-to-cart {
-            0% {
-                offset-distance: 0%;
-            }
-            100% {
-                offset-distance: 100%;
-                transform: scale(0.2);
-            }
-        }
-
-        @keyframes fly-to-cart {
-            0% {
-                offset-distance: 0%;
-            }
-            100% {
-                offset-distance: 100%;
-                transform: scale(0.2);
-            }
+        .dest {
+            position: absolute;
+            top: 100px;
+            left: 500px;
+            width: 6rem;
+            height: 5rem;
+            background: green;
+            transform: perspective(200px) rotateX(-40deg);
         }
     </style>
 </head>
-
-<body translate="no">
-<div class="icon-cart">
-    <div class="cart-line-1" style="background-color: #02A7D7"></div>
-    <div class="cart-line-2" style="background-color: #02A7D7"></div>
-    <div class="cart-line-3" style="background-color: #02A7D7"></div>
-    <div class="cart-wheel" style="background-color: #02A7D7"></div>
-</div>
-
-<div class="grid">
-    <div class="product">
-        <img src="https://placedog.net/150/150&amp;id=5" class="product__image" alt="Dog product">
-        <button type="button" class="product__buy">Add to cart</button>
+<body>
+<div class='source'>
+    <div class="box">
+        <div class="img"></div>
     </div>
 </div>
+<div class='dest'></div>
+<a href="#" onclick="run();">Run</a>
+<script>
+    function run (){
+        var source = document.querySelector('.source'),
+            dest = document.querySelector('.dest'),
+            source_offset = getOffsetRect(source),
+            dest_offset = getOffsetRect(dest),
+            dx = dest_offset.left - source_offset.left,
+            dy = dest_offset.top - source_offset.top,
+            peak = dy == 0 ? 0 : (Math.abs(dy)+100)/Math.abs(dy),
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script id="rendered-js">
-    var duration = 500;
+            x1 = 0,
+            x2 = dx,
+            x3 = dx * (dy == 0 ? (dx / 2) : 1 / (1 + Math.sqrt(peak-1))),
+            y1 = 0,
+            y2 = dy,
+            y3 = dy - 100,
 
-    $('.product__buy').on('click', function (event) {
+            x12 = Math.pow(x1, 2),
+            x22 = Math.pow(x2, 2),
+            x32 = Math.pow(x3, 2),
 
-        event.preventDefault();
+            D = determinant([
+                [x12, x1, 1],
+                [x22, x2, 1],
+                [x32, x3, 1]
+            ]),
 
-        // Get cart icon.
-        var $cart = $('.icon-cart');
+            Da = determinant([
+                [y1, x1, 1],
+                [y2, x2, 1],
+                [y3, x3, 1]
+            ]),
 
-        var $avatar = $(this).
-        parents('.product').
-        find('img');
+            Db = determinant([
+                [x12, y1, 1],
+                [x22, y2, 1],
+                [x32, y3, 1]
+            ]),
 
-        var object_w = $avatar.width() / 2;
-        var object_h = $avatar.height() / 2;
-        var dx = $cart.offset().left + 24 - $avatar.offset().left;
-        var dy = $cart.offset().top + 24 - $avatar.offset().top;
+            Dc = determinant([
+                [x12, x1, y1],
+                [x22, x2, y2],
+                [x32, x3, y3]
+            ]),
 
-        var path = "path('" +
-            "M" + object_w + "," + object_h +
-            "C0,-300 " + (dx + 100) + "," + (dy - 400) + " " + dx + "," + (dy - 20) +
-            "')";
+            a = Da/D,
+            b = Db/D,
+            c = Dc/D,
 
-        $avatar.
-        css('offset-path', path).
-        addClass('product__image--is-flying');
+            f = polynomial(a, b, c),
+            df = derivative(a, b),
 
-        setTimeout(function () {
-            $avatar.
-            removeClass('product__image--is-flying');
-        }, duration);
+            scale = "@keyframes img-scale {\
+        0% { transform: scale(1); }\
+        100% { transform: scale(0.2); }\
+      }",
+            parabola = scale + '@keyframes parabola {';
 
-    });
+        for (var i = 0; i <= 100; i+=5) {
+            var x = dx * i / 100,
+                angle = i == 0 ? 0 : ((dx > 0 ? 1 : -1) * 90+(Math.atan(df(x)) * 180 / Math.PI)),
+                rotate = dx == 0 ? 'rotateX' : 'rotateZ';
+            parabola += i + "% { transform: translate(" + x + "px, " + f(x) + "px) " + rotate + "(" + angle + "deg); }";
+        }
+
+        parabola += "}";
+
+        var style = document.createElement('style');
+        style.setAttribute("id", "mystyle");
+        var content = document.createTextNode(parabola);
+        style.appendChild(content);
+
+        document.body.appendChild(style);
+        setTimeout(function(){
+            var element = document.getElementById("mystyle");
+            element.parentNode.removeChild(element);
+        }, 700);
+    }
+
+    function getOffsetRect(elem) {
+        var box = elem.getBoundingClientRect()
+
+        var body = document.body
+        var docElem = document.documentElement
+
+        var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop
+        var scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft
+
+        var clientTop = docElem.clientTop || body.clientTop || 0
+        var clientLeft = docElem.clientLeft || body.clientLeft || 0
+
+        var top  = box.top +  scrollTop - clientTop
+        var left = box.left + scrollLeft - clientLeft
+
+        return { top: Math.round(top), left: Math.round(left) }
+    }
+
+    function determinant(a) {
+        if (a.length == 2) {
+            return (a[0][0] * a[1][1]) - (a[1][0] * a[0][1]);
+        }
+        if (a.length == 3) {
+            return (a[0][0] * determinant([
+                [a[1][1], a[1][2]],
+                [a[2][1], a[2][2]],
+            ])) - (a[0][1] * determinant([
+                [a[1][0], a[1][2]],
+                [a[2][0], a[2][2]],
+            ])) + (a[0][2] * determinant([
+                [a[1][0], a[1][1]],
+                [a[2][0], a[2][1]],
+            ]));
+        }
+    }
+
+    function polynomial(a, b, c) {
+        return function(x) {
+            return (a * Math.pow(x, 2)) + (b * x) + c;
+        };
+    }
+
+    function derivative(a, b) {
+        return function(x) {
+            return 2 * a * x + b;
+        };
+    }
 </script>
-
 </body>
 </html>
