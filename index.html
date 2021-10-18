@@ -1,38 +1,219 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Early in pandemic, frantic doctors traded tips across oceans</title>
+    <title>加入购物车动画3</title>
     <style>
-        html{
-            color: #2c2c2c;
+        .icon-cart {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            float: right;
+            width: 48px;
+            height: 48px;
+            overflow: hidden;
         }
-        p{
-                font-family: 'FreightText', Georgia, serif;
-        font-weight: 300;
-        line-height: 1.6875rem;
-        margin: 0.75rem 0;
+
+        .icon-cart .cart-line-1 {
+            width: 15%;
+            height: 7%;
+            position: absolute;
+            left: 8%;
+            top: 25%;
+            transform: rotate(5deg);
+            background-color: #000;
+            border-bottom-left-radius: 35%;
         }
-        main{
-            width: 800px;
-            margin: auto;
+
+        .icon-cart .cart-line-2 {
+            width: 35%;
+            height: 7%;
+            position: absolute;
+            left: 6%;
+            top: 40%;
+            transform: rotate(80deg);
+            background-color: #000;
+        }
+
+        .icon-cart .cart-line-2:before {
+            content: "";
+            width: 120%;
+            height: 100%;
+            position: absolute;
+            left: 45%;
+            top: -280%;
+            transform: rotate(-80deg);
+            background-color: inherit;
+        }
+
+        .icon-cart .cart-line-2:after {
+            content: "";
+            width: 70%;
+            height: 100%;
+            position: absolute;
+            left: 59%;
+            top: -670%;
+            background-color: inherit;
+            transform: rotate(40deg);
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 25%;
+        }
+
+        .icon-cart .cart-line-3 {
+            width: 30%;
+            height: 7%;
+            position: absolute;
+            left: 33%;
+            top: 45%;
+            background-color: #000;
+        }
+
+        .icon-cart .cart-line-3:after {
+            content: "";
+            width: 124%;
+            height: 100%;
+            position: absolute;
+            top: -150%;
+            left: -5%;
+            background-color: inherit;
+        }
+
+        .icon-cart .cart-wheel {
+            width: 12%;
+            height: 12%;
+            background-color: #000;
+            border-radius: 100%;
+            position: absolute;
+            left: 28%;
+            bottom: 20%;
+        }
+
+        .icon-cart .cart-wheel:after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background-color: inherit;
+            border-radius: 100%;
+            position: absolute;
+            left: 200%;
+            bottom: 0;
+        }
+
+        .grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        .product {
+            position: relative;
+            flex-basis: 150px;
+            background: #fff;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin: 0 0 2rem;
+        }
+        .product img {
+            offset-rotate: 0deg;
+            transition: all 300ms;
+        }
+
+        .product__buy {
+            display: block;
+            width: 100%;
+            margin: 0;
+            padding: 1rem 2rem;
+            border: 0;
+            background: #02A7D7;
+            color: #fff;
+            cursor: pointer;
+        }
+        .product__buy:hover {
+            background: #08f;
+        }
+
+        .product__image--is-flying {
+            -webkit-animation: fly-to-cart 500ms 1 ease-in-out forwards;
+            animation: fly-to-cart 500ms 1 ease-in-out forwards;
+            opacity: 0.5;
+            border-radius: 50%;
+        }
+
+        @-webkit-keyframes fly-to-cart {
+            0% {
+                offset-distance: 0%;
+            }
+            100% {
+                offset-distance: 100%;
+                transform: scale(0.2);
+            }
+        }
+
+        @keyframes fly-to-cart {
+            0% {
+                offset-distance: 0%;
+            }
+            100% {
+                offset-distance: 100%;
+                transform: scale(0.2);
+            }
         }
     </style>
 </head>
-<body>
-    <main>
-        <a href="weixin://dl/officialaccounts">iiiiiii到微信</a>
-        <h2>Early in pandemic, frantic doctors traded tips across oceans</h2>
-            <p>Amid the chaos of the pandemic’s early days, doctors who faced the first coronavirus onslaught reached across oceans and language barriers in an unprecedented effort to advise colleagues trying to save lives in the dark.</p>
-    <p>With no playbook to follow and no time to wait for research, YouTube videos describing autopsy findings and X-rays swapped on Twitter and WhatsApp spontaneously filled the gap.</p>
-    <p>When Stephen Donelson arrived at the University of Texas Southwestern Medical Center in mid-March, Dr. Kristina Goff was among those who turned to what she called “the stories out of other places that were hit before.”</p>
-    <p>Donelson’s family hadn’t left the house in two weeks after COVID-19 started spreading in Texas, hoping to shield the organ transplant recipient. Yet one night, his wife found him barely breathing, his skin turning blue, and called 911.</p>
-    <p>In New York or Italy, where hospitals were overflowing, Goff thinks Donelson wouldn’t even have qualified for a then-precious ventilator. But in Dallas, “we pretty much threw everything we could at him,” she said.</p>
-    <p>Like doctors everywhere, Goff was at the beginning of a huge and daunting learning curve.</p>
-    <p>“It’s a tsunami. Something that if you don’t experience it directly, you can’t understand,” Italian Dr. Pier Giorgio Villani said in a series of webinars on six straight Tuesday evenings to alert other intensive care units what to expect. They started just two weeks after Italy’s first hospitalized patient arrived in his ICU, and 10 days before Donelson fell ill in Texas.</p>
-    <p>Villani, who works in the northern city of Lodi, described a battle to accommodate the constant flow of people needing breathing tubes. “We had 10, 12, 15 patients to intubate and an ICU with seven patients already intubated,” he said.</p>
 
-    </main>
+<body translate="no">
+<div class="icon-cart">
+    <div class="cart-line-1" style="background-color: #02A7D7"></div>
+    <div class="cart-line-2" style="background-color: #02A7D7"></div>
+    <div class="cart-line-3" style="background-color: #02A7D7"></div>
+    <div class="cart-wheel" style="background-color: #02A7D7"></div>
+</div>
+
+<div class="grid">
+    <div class="product">
+        <img src="https://placedog.net/150/150&amp;id=5" class="product__image" alt="Dog product">
+        <button type="button" class="product__buy">Add to cart</button>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script id="rendered-js">
+    var duration = 500;
+
+    $('.product__buy').on('click', function (event) {
+
+        event.preventDefault();
+
+        // Get cart icon.
+        var $cart = $('.icon-cart');
+
+        var $avatar = $(this).
+        parents('.product').
+        find('img');
+
+        var object_w = $avatar.width() / 2;
+        var object_h = $avatar.height() / 2;
+        var dx = $cart.offset().left + 24 - $avatar.offset().left;
+        var dy = $cart.offset().top + 24 - $avatar.offset().top;
+
+        var path = "path('" +
+            "M" + object_w + "," + object_h +
+            "C0,-300 " + (dx + 100) + "," + (dy - 400) + " " + dx + "," + (dy - 20) +
+            "')";
+
+        $avatar.
+        css('offset-path', path).
+        addClass('product__image--is-flying');
+
+        setTimeout(function () {
+            $avatar.
+            removeClass('product__image--is-flying');
+        }, duration);
+
+    });
+</script>
+
 </body>
 </html>
