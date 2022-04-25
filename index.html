@@ -4,216 +4,41 @@
     <meta charset=utf-8>
     <title>加入购物车动画1</title>
     <style>
-        a {
-            width: 3.5rem;
-            height: 2.6rem;
-            display: inline-block;
-            background: #ff8800;
-            color: #333;
-            text-decoration: none;
-            margin: 10px;
-        }
-
-        .source {
-            position: absolute;
-            top: 490px;
-            left: 10px;
-            width: 50px;
-            height: 50px;
-        }
-
-        .box {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50px;
-            height: 50px;
-            -webkit-animation: parabola 0.5s linear;
-            -o-animation: parabola 0.5s linear;
-            -moz-animation: parabola 0.5s linear;
-            animation: parabola 0.5s linear;
-            -webkit-animation-fill-mode: forwards;
-            -moz-animation-fill-mode: forwards;
-            -o-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
-        }
-
-        .img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50px;
-            height: 50px;
-            background: red;
-            -webkit-animation: img-scale 0.5s linear;
-            -moz-animation: img-scale 0.5s linear;
-            -o-animation: img-scale 0.5s linear;
-            animation: img-scale 0.5s linear;
-            -webkit-animation-fill-mode: forwards;
-            -o-animation-fill-mode: forwards;
-            -moz-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
-        }
-
-        .img:after {
-            content: "";
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            border-bottom: 10px solid red;
-            border-left: 25px solid #fff;
-            border-right: 25px solid #fff;
-        }
-
-        .dest {
-            position: absolute;
-            top: 100px;
-            left: 500px;
-            width: 6rem;
-            height: 5rem;
-            background: green;
-            transform: perspective(200px) rotateX(-40deg);
+        body{
+            background-color: cyan;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            color:#fff;
         }
     </style>
 </head>
 <body>
-    <a href="weixin://">打开微信</a>
-<div class='source'>
-    <div class="box">
-        <div class="img"></div>
-    </div>
-</div>
-<div class='dest'></div>
-<a href="#" onclick="run();">Run</a>
-
+<h1 id="text"></h1>
 <script>
-    function run() {
-        var source = document.querySelector('.source'),
-            dest = document.querySelector('.dest'),
-            source_offset = getOffsetRect(source),
-            dest_offset = getOffsetRect(dest),
-            dx = dest_offset.left - source_offset.left,
-            dy = dest_offset.top - source_offset.top,
-            peak = dy == 0 ? 0 : (Math.abs(dy) + 100) / Math.abs(dy),
+   const textEl = document.getElementById('text')
+    const speedEl = 1
+    const text = 'SuMeng,you are my best friend.'
+    let idx = 1
+    let speed = 300 / speedEl
 
-            x1 = 0,
-            x2 = dx,
-            x3 = dx * (dy == 0 ? (dx / 2) : 1 / (1 + Math.sqrt(peak - 1))),
-            y1 = 0,
-            y2 = dy,
-            y3 = dy - 100,
+    writeText()
 
-            x12 = Math.pow(x1, 2),
-            x22 = Math.pow(x2, 2),
-            x32 = Math.pow(x3, 2),
+    function writeText() {
+        textEl.innerText = text.slice(0, idx)
 
-            D = determinant([
-                [x12, x1, 1],
-                [x22, x2, 1],
-                [x32, x3, 1]
-            ]),
+        idx++
 
-            Da = determinant([
-                [y1, x1, 1],
-                [y2, x2, 1],
-                [y3, x3, 1]
-            ]),
-
-            Db = determinant([
-                [x12, y1, 1],
-                [x22, y2, 1],
-                [x32, y3, 1]
-            ]),
-
-            Dc = determinant([
-                [x12, x1, y1],
-                [x22, x2, y2],
-                [x32, x3, y3]
-            ]),
-
-            a = Da / D,
-            b = Db / D,
-            c = Dc / D,
-
-            f = polynomial(a, b, c),
-            df = derivative(a, b),
-
-            scale = "@-webkit-keyframes img-scale {\
-        0% { transform: scale(1); }\
-        100% { transform: scale(0.2); }\
-      }",
-            parabola = scale + '@-webkit-keyframes parabola {';
-
-        for (var i = 0; i <= 100; i += 5) {
-            var x = dx * i / 100,
-                angle = i == 0 ? 0 : ((dx > 0 ? 1 : -1) * 90 + (Math.atan(df(x)) * 180 / Math.PI)),
-                rotate = dx == 0 ? 'rotateX' : 'rotateZ';
-            parabola += i + "% { -webkit-transform: translate(" + x + "px, " + f(x) + "px) " + rotate + "(" + angle + "deg); }";
+        if(idx > text.length) {
+            idx = 1
         }
 
-        parabola += "}";
-
-        var style = document.createElement('style');
-        style.setAttribute("id", "mystyle");
-        var content = document.createTextNode(parabola);
-        style.appendChild(content);
-
-        document.body.appendChild(style);
-        setTimeout(function () {
-            var element = document.getElementById("mystyle");
-            // element.parentNode.removeChild(element);
-
-        }, 700);
-    }
-
-    function getOffsetRect(elem) {
-        var box = elem.getBoundingClientRect()
-
-        var body = document.body
-        var docElem = document.documentElement
-
-        var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop
-        var scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft
-
-        var clientTop = docElem.clientTop || body.clientTop || 0
-        var clientLeft = docElem.clientLeft || body.clientLeft || 0
-
-        var top = box.top + scrollTop - clientTop
-        var left = box.left + scrollLeft - clientLeft
-
-        return {top: Math.round(top), left: Math.round(left)}
-    }
-
-    function determinant(a) {
-        if (a.length == 2) {
-            return (a[0][0] * a[1][1]) - (a[1][0] * a[0][1]);
-        }
-        if (a.length == 3) {
-            return (a[0][0] * determinant([
-                [a[1][1], a[1][2]],
-                [a[2][1], a[2][2]],
-            ])) - (a[0][1] * determinant([
-                [a[1][0], a[1][2]],
-                [a[2][0], a[2][2]],
-            ])) + (a[0][2] * determinant([
-                [a[1][0], a[1][1]],
-                [a[2][0], a[2][1]],
-            ]));
-        }
-    }
-
-    function polynomial(a, b, c) {
-        return function (x) {
-            return (a * Math.pow(x, 2)) + (b * x) + c;
-        };
-    }
-
-    function derivative(a, b) {
-        return function (x) {
-            return 2 * a * x + b;
-        };
+        setTimeout(writeText, speed)
     }
 </script>
 </body>
